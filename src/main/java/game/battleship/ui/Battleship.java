@@ -1,4 +1,4 @@
-package game.battleship;
+package game.battleship.ui;
 
 /*
  * Developer: Ben Oeyen
@@ -13,6 +13,7 @@ public class Battleship extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) {
