@@ -7,9 +7,12 @@ package game.battleship.model;
 
 public class Player {
     private String name;
-    private int number;
     private int shots = 0;
     private int hits = 0;
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -17,14 +20,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public int getShots() {
