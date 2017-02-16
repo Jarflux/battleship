@@ -1,8 +1,11 @@
 package game.battleship.ui;
 
 import game.battleship.model.GameState;
+import game.battleship.model.Player;
+import game.battleship.model.Sea;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Developer: Ben Oeyen
@@ -10,17 +13,63 @@ import javax.swing.*;
  */
 public class Battleship {
 
+    private static JFrame frame;
 
     public static void main(String[] args) {
 
-        String nameP1 = JOptionPane.showInputDialog("Player 1 name");
-        String nameP2 = JOptionPane.showInputDialog("Player 2 name");
-        String gridSize = JOptionPane.showInputDialog("Grid Size");
+        frame = new JFrame("Battleship");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
-        GameState gameState = new GameState(Integer.parseInt(gridSize),nameP1,nameP2);
+        String nameP1 = getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
+        String nameP2 = getStringInput("Player 2 name"); //
+        int gridSize = 10;//getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
 
-        JOptionPane.showMessageDialog(null, "Done");
+        GameState gameState = new GameState(gridSize,nameP1,nameP2);
+
+        showState(gameState);
     }
 
+    private static String getStringInput(String messsage) {
+        //TODO add error handling
+        return JOptionPane.showInputDialog(messsage);
+    }
+
+    private static int getIntInput(String messsage) {
+        //TODO add error handling
+        return Integer.parseInt(JOptionPane.showInputDialog(messsage));
+    }
+
+
+    private static void showState(GameState gameState) {
+        JPanel jPanel = new JPanel();
+        jPanel.add(getPlayerSide(gameState.getP1(), gameState.getSea1()), BorderLayout.EAST);
+        jPanel.add(getPlayerSide(gameState.getP2(), gameState.getSea2()), BorderLayout.WEST);
+        frame.setContentPane(jPanel);
+        frame.pack();
+        frame.setVisible(true);
+
+}
+
+    private static JPanel getPlayerSide(Player player, Sea sea){
+        JPanel playerSide = new JPanel();
+        playerSide.setLayout(new BorderLayout());
+        playerSide.add( getPlayerLabel(player), BorderLayout.NORTH);
+
+        JPanel seaPanel = new JPanel();
+        seaPanel.setLayout(new GridLayout(sea.getWidth(),sea.getHeight()));
+        for(int i= 0 ; i< 10*10; i++){
+            seaPanel.add(new JTextField("X"));
+        }
+
+        playerSide.add( seaPanel ,BorderLayout.SOUTH);
+
+        return playerSide;
+    }
+
+
+    private static JTextArea getPlayerLabel(Player player) {
+        return new JTextArea(player.getName() + "\nhits:" + player.getHits() + "\nshots:" + player.getShots() + "\nacc: " + player.getHitPercentage() + "%");
+    }
 
 }

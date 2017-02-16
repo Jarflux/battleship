@@ -1,7 +1,5 @@
 package game.battleship.model;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +26,18 @@ public class Sea {
         if(grid != null && grid.get(coordinateX) != null && grid.get(coordinateX).get(coordinateY)!=null){
             return grid.get(coordinateX).get(coordinateY);
         }
-        return StringUtils.EMPTY;
+        return "";
     }
 
     public void setState(int coordinateX, int coordinateY, String state){
         //TODO implement
     }
 
+    public int getWidth() {
+        return grid.size();
+    }
+
+    public int getHeight() {
+        return grid.get(0).size();
+    }
 }
