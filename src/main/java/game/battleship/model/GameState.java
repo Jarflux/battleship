@@ -13,4 +13,12 @@ public class GameState {
     Sea sea1;
     Sea sea2;
 
+    public GameState( int gridSize, String nameP1, String nameP2 ){
+        sea1 = new Sea(gridSize);
+        sea2 = new Sea(gridSize);
+        p1 = new Player(nameP1);
+        p2 = new Player(nameP2);
+    }
+
+
 }
