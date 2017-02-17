@@ -15,6 +15,7 @@ Own version of the popular battleship game
 - [ ] Configure Ships
 
 ## NICE TO HAVE
+- [ ] Auto deploy fleet
 - [ ] Save Game
 - [ ] Load Game
 - [ ] Artificial Intelligence

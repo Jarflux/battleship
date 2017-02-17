@@ -24,7 +24,7 @@ public class Battleship {
 
         String nameP1 = getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
         String nameP2 = getStringInput("Player 2 name"); //
-        int gridSize = 10; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
+        int gridSize = 5; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
 
         GameState gameState = new GameState(gridSize,nameP1,nameP2);
 
@@ -119,7 +119,7 @@ public class Battleship {
 
 
     private static JTextArea getPlayerLabel(Player player) {
-        JTextArea playerLabel = new JTextArea("Player: " + player.getName() + "\nHITS: " + player.getHits() + "\nSHOTS: " + player.getShots() + "\nACCURACY: " + player.getHitPercentage() + "%");
+        JTextArea playerLabel = new JTextArea("PLAYER: " + player.getName() + "\nHITS: " + player.getHits() + "\nSHOTS: " + player.getShots() + "\nACCURACY: " + player.getHitPercentage() + "%");
         playerLabel.setBackground(new Color(0, 65, 94));
         playerLabel.setForeground(new Color(255,255,255));
         playerLabel.setMargin(new Insets(5,5,5,5));
