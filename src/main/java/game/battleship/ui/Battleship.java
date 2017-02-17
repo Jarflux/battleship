@@ -42,19 +42,20 @@ public class Battleship {
 
 
     private static void showState(GameState gameState) {
-        JPanel jPanel = new JPanel();
-        jPanel.add(getPlayerSide(gameState.getP1(), gameState.getSea1()), BorderLayout.EAST);
-        jPanel.add(getPlayerSide(gameState.getP2(), gameState.getSea2()), BorderLayout.WEST);
+        JPanel jPanel = new JPanel(new BorderLayout(0,0));
+        jPanel.add(getPlayerSide(gameState.getP1(), gameState.getSea1(), Color.GREEN), BorderLayout.WEST);
+        jPanel.add(getPlayerSide(gameState.getP2(), gameState.getSea2(), Color.RED), BorderLayout.EAST);
         frame.setContentPane(jPanel);
         frame.pack();
         frame.setVisible(true);
     }
 
 
-    private static JPanel getPlayerSide(Player player, Sea sea){
+    private static JPanel getPlayerSide(Player player, Sea sea, Color color){
         JPanel playerSide = new JPanel();
 
         playerSide.setLayout(new BorderLayout());
+        playerSide.setBorder(BorderFactory.createMatteBorder(5,5,5,5, color));
         playerSide.add( getPlayerLabel(player), BorderLayout.NORTH);
 
         JPanel seaPanel = new JPanel();
@@ -75,7 +76,11 @@ public class Battleship {
 
 
     private static JTextArea getPlayerLabel(Player player) {
-        return new JTextArea(player.getName() + "\nhits:" + player.getHits() + "\nshots:" + player.getShots() + "\nacc: " + player.getHitPercentage() + "%");
+        JTextArea playerLabel = new JTextArea("Player: " + player.getName() + "\nHITS: " + player.getHits() + "\nSHOTS: " + player.getShots() + "\nACCURACY: " + player.getHitPercentage() + "%");
+        playerLabel.setBackground(new Color(0, 65, 94));
+        playerLabel.setForeground(new Color(255,255,255));
+        playerLabel.setMargin(new Insets(5,5,5,5));
+        return playerLabel;
     }
 
 }
