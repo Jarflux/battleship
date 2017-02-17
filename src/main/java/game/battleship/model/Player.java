@@ -6,6 +6,7 @@ package game.battleship.model;
  */
 
 public class Player {
+    private int id;
     private String name;
     private int shots = 0;
     private int hits = 0;
@@ -26,24 +27,33 @@ public class Player {
         return shots;
     }
 
-    public void setShots(int shots) {
-        this.shots = shots;
+    public void incrementShots(){
+        shots++;
     }
 
     public int getHits() {
         return hits;
     }
 
-    public void setHits(int hits) {
-        this.hits = hits;
+    public void incrementHits(){
+        hits++;
     }
 
-    public double getHitPercentage(){
-        if(shots!=0){
-            return ((double) hits) / ((double) shots);
-        }else{
-            return 0.0;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getHitPercentage() {
+        if (shots != 0) {
+            return (int) (((double) hits) / ((double) shots) * 100);
+        } else {
+            return 0;
         }
     }
+
 
 }

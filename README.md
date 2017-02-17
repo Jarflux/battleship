@@ -10,7 +10,7 @@ Own version of the popular battleship game
 - [ ] Images in UI
 - [ ] Score added in highscores
 - [ ] Place Ships
-- [ ] Firing
+- [x] Firing
 - [ ] Calculate Highscore
 - [ ] Configure Ships
 

@@ -6,7 +6,6 @@ package game.battleship.model;
  */
 
 public class GameState {
-
     Player p1;
     Player p2;
 
@@ -50,5 +49,13 @@ public class GameState {
 
     public void setSea2(Sea sea2) {
         this.sea2 = sea2;
+    }
+
+    public void shoot(Player player, int coordinateX, int coordinateY){
+        if (p1.equals(player)){
+            sea2.fire(coordinateX,coordinateY);
+        }else{
+            sea1.fire(coordinateX,coordinateY);
+        }
     }
 }
