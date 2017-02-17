@@ -2,6 +2,7 @@ package game.battleship.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Developer: Ben Oeyen
@@ -9,24 +10,24 @@ import java.util.List;
  */
 public class Sea {
 
-    List<List<String>> grid;
+    List<List<SeaState>> grid;
 
     public Sea(int gridSize) {
-        grid = new ArrayList<List<String>>();
+        grid = new ArrayList<List<SeaState>>();
         for(int i = 0 ; i < gridSize ; i++){
-            ArrayList<String> column = new ArrayList<String>();
+            ArrayList<SeaState> column = new ArrayList<SeaState>();
             for(int j = 0 ; j < gridSize ; j++){
-                column.add("EMPTY");
+                column.add(SeaState.getRandom());
             }
             grid.add(column);
         }
     }
 
-    public String getState(int coordinateX, int coordinateY){
+    public SeaState getState(int coordinateX, int coordinateY){
         if(grid != null && grid.get(coordinateX) != null && grid.get(coordinateX).get(coordinateY)!=null){
             return grid.get(coordinateX).get(coordinateY);
         }
-        return "";
+        return SeaState.EMPTY;
     }
 
     public void setState(int coordinateX, int coordinateY, String state){

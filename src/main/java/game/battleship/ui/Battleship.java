@@ -3,6 +3,7 @@ package game.battleship.ui;
 import game.battleship.model.GameState;
 import game.battleship.model.Player;
 import game.battleship.model.Sea;
+import game.battleship.model.SeaState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,6 @@ public class Battleship {
     private static JFrame frame;
 
     public static void main(String[] args) {
-
         frame = new JFrame("Battleship");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -62,16 +62,44 @@ public class Battleship {
         seaPanel.setBackground(new Color(84, 147, 175));
         seaPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         seaPanel.setLayout(new GridLayout(sea.getWidth(),sea.getHeight(), 5, 5));
-        for(int i= 0 ; i< 10*10; i++){
-            JPanel seaTile = new JPanel();
-            seaTile.setBackground(new Color(0, 65, 94));
-            seaTile.setPreferredSize(new Dimension(50,50));
-            seaPanel.add(seaTile);
-        }
-
+        AddSeaTiles(sea, seaPanel);
         playerSide.add( seaPanel ,BorderLayout.SOUTH);
 
         return playerSide;
+    }
+
+    private static void AddSeaTiles(Sea sea, JPanel seaPanel) {
+        for(int i= 0 ; i< sea.getWidth(); i++){
+            for(int j= 0 ; j< sea.getHeight(); j++){
+                JPanel seaTile = new JPanel();
+                seaTile.setBackground(new Color(0, 65, 94));
+                SeaState seaState = sea.getState(i,j);
+                assignStylingToSeaTile(seaTile, seaState);
+                seaTile.setPreferredSize(new Dimension(50, 50));
+                seaPanel.add(seaTile);
+            }
+        }
+    }
+
+    private static void assignStylingToSeaTile(JPanel seaTile, SeaState seaState) {
+        switch (seaState){
+            case EMPTY:
+                seaTile.setBackground(new Color(0, 65, 94));
+//                        ImageIcon image = new ImageIcon("image/pic1.jpg");
+//                        JLabel label = new JLabel("", image, JLabel.CENTER);
+//                        JPanel panel = new JPanel(new BorderLayout());
+//                        panel.add( label, BorderLayout.CENTER );
+                break;
+            case HIT:
+                seaTile.setBackground(Color.red);
+                break;
+            case MISS:
+                seaTile.setBackground(Color.white);
+                break;
+            case SHIP:
+                seaTile.setBackground(Color.gray);
+                break;
+        }
     }
 
 
