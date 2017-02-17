@@ -20,6 +20,7 @@ public class Battleship {
         frame = new JFrame("Battleship");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setJMenuBar(buildMenuBar());
 
         String nameP1 = getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
         String nameP2 = getStringInput("Player 2 name"); //
@@ -66,6 +67,20 @@ public class Battleship {
         playerSide.add( seaPanel ,BorderLayout.SOUTH);
 
         return playerSide;
+    }
+
+    private static JMenuBar buildMenuBar(){
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Battleship");
+        menuBar.add(menu);
+        menu.add(new JMenuItem("New Game"));
+        menu.add(new JMenuItem("Save Game"));
+        menu.add(new JMenuItem("Load Game"));
+        menu.addSeparator();
+        menu.add(new JMenuItem("Highscores"));
+        menu.addSeparator();
+        menu.add(new JMenuItem("Exit Game"));
+        return menuBar;
     }
 
     private static void AddSeaTiles(Sea sea, JPanel seaPanel) {

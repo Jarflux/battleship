@@ -11,11 +11,12 @@ import java.util.List;
 public class HighScoreRepository {
 
     public List<HashMap<String, Long>> getAllHighScores(){
+        //TODO implement Read highsores from file
         return new ArrayList<HashMap<String, Long>>();
     }
 
     public void addHighScore(String playerName, Long highScore ){
-
+        // TODO implement
     }
 
 }
