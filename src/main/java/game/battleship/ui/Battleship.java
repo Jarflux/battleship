@@ -23,7 +23,7 @@ public class Battleship {
 
         String nameP1 = getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
         String nameP2 = getStringInput("Player 2 name"); //
-        int gridSize = 10;//getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
+        int gridSize = 10; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
 
         GameState gameState = new GameState(gridSize,nameP1,nameP2);
 
@@ -48,18 +48,24 @@ public class Battleship {
         frame.setContentPane(jPanel);
         frame.pack();
         frame.setVisible(true);
+    }
 
-}
 
     private static JPanel getPlayerSide(Player player, Sea sea){
         JPanel playerSide = new JPanel();
+
         playerSide.setLayout(new BorderLayout());
         playerSide.add( getPlayerLabel(player), BorderLayout.NORTH);
 
         JPanel seaPanel = new JPanel();
-        seaPanel.setLayout(new GridLayout(sea.getWidth(),sea.getHeight()));
+        seaPanel.setBackground(new Color(84, 147, 175));
+        seaPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        seaPanel.setLayout(new GridLayout(sea.getWidth(),sea.getHeight(), 5, 5));
         for(int i= 0 ; i< 10*10; i++){
-            seaPanel.add(new JTextField("X"));
+            JPanel seaTile = new JPanel();
+            seaTile.setBackground(new Color(0, 65, 94));
+            seaTile.setPreferredSize(new Dimension(50,50));
+            seaPanel.add(seaTile);
         }
 
         playerSide.add( seaPanel ,BorderLayout.SOUTH);
