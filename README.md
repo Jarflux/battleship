@@ -7,8 +7,10 @@ Own version of the popular battleship game
 - [x] Basic Colors to UI
 - [ ] Menubar with actions
 - [ ] Show highscores
-- [ ] Images in UI
-- [ ] Score added in highscores
+- [x] Turn based firing
+- [x] Victory conditions
+- [x] Images in UI
+- [ ] After victory add highscores
 - [ ] Place Ships
 - [x] Firing
 - [ ] Calculate Highscore

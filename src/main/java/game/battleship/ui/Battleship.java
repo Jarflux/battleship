@@ -2,6 +2,7 @@ package game.battleship.ui;
 
 import game.battleship.model.*;
 import game.battleship.service.FiringService;
+import game.battleship.service.VictoryService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,9 @@ public class Battleship {
     private static GameState gameState;
 
     private static final boolean DEBUG = true;
+    private static final String OCEAN = "src/main/resources/image/ocean.png";
+    private static final String MISS = "src/main/resources/image/miss.png";
+    private static final String HIT = "src/main/resources/image/hit.png";
 
     public static void main(String[] args) {
         frame = new JFrame("Battleship");
@@ -29,9 +33,9 @@ public class Battleship {
         String nameP2 = "Elien"; //getStringInput("Player 2 name"); //
         int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
 
-        gameState = new GameState(gridSize,nameP1,nameP2);
-        gameState.getSea1().addSchip(1,1, new Ship(3));
-        gameState.getSea2().addSchip(1,1, new Ship(5));
+        gameState = new GameState(gridSize, nameP1, nameP2);
+        gameState.getSea1().addSchip(1, 1, new Ship(3));
+        gameState.getSea2().addSchip(1, 1, new Ship(5));
 
         showState();
     }
@@ -48,78 +52,81 @@ public class Battleship {
 
 
     private static void showState() {
-        JPanel jPanel = new JPanel(new BorderLayout(0,0));
-        jPanel.add(getPlayerSide(gameState.getP1(), gameState.getSea1(),  gameState.getSea2(), Color.GREEN), BorderLayout.WEST);
+        JPanel jPanel = new JPanel(new BorderLayout(0, 0));
+        jPanel.add(getPlayerSide(gameState.getP1(), gameState.getSea1(), gameState.getSea2(), Color.GREEN), BorderLayout.WEST);
         jPanel.add(getPlayerSide(gameState.getP2(), gameState.getSea2(), gameState.getSea1(), Color.RED), BorderLayout.EAST);
         frame.setContentPane(jPanel);
         frame.pack();
+
+        Player victor = VictoryService.getVictor(gameState);
+        if (victor != null) {
+            JOptionPane.showMessageDialog(frame, victor.getName() + " won the game!");
+        }
     }
 
 
-    private static JPanel getPlayerSide(Player player, Sea ownSea, Sea enemySea, Color color){
+    private static JPanel getPlayerSide(Player player, Sea ownSea, Sea enemySea, Color color) {
         JPanel playerSide = new JPanel();
 
         playerSide.setLayout(new BorderLayout());
-        playerSide.setBorder(BorderFactory.createMatteBorder(5,5,5,5, color));
-        playerSide.add( getPlayerLabel(player), BorderLayout.NORTH);
+        playerSide.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, color));
+        playerSide.add(getPlayerLabel(player), BorderLayout.NORTH);
 
-        JPanel seaPanel = new JPanel(new BorderLayout(0,0));
-        if(DEBUG){
+        JPanel seaPanel = new JPanel(new BorderLayout(0, 0));
+        if (DEBUG) {
             JPanel shipPanel = new JPanel();
             shipPanel.setBackground(new Color(84, 147, 175));
-            shipPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-            shipPanel.setLayout(new GridLayout(ownSea.getWidth(),ownSea.getHeight(), 5, 5));
+            shipPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            shipPanel.setLayout(new GridLayout(ownSea.getWidth(), ownSea.getHeight(), 5, 5));
             AddShipTiles(ownSea, player, shipPanel);
-            seaPanel.add(shipPanel ,BorderLayout.NORTH);
+            seaPanel.add(shipPanel, BorderLayout.NORTH);
         }
 
         JPanel firingPanel = new JPanel();
         firingPanel.setBackground(new Color(84, 147, 175));
-        firingPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-        firingPanel.setLayout(new GridLayout(enemySea.getWidth(),enemySea.getHeight(), 5, 5));
+        firingPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        firingPanel.setLayout(new GridLayout(enemySea.getWidth(), enemySea.getHeight(), 5, 5));
         AddFiringTiles(enemySea, player, firingPanel);
-        seaPanel.add(firingPanel ,BorderLayout.SOUTH);
+        seaPanel.add(firingPanel, BorderLayout.SOUTH);
 
         playerSide.add(seaPanel, BorderLayout.SOUTH);
         return playerSide;
     }
 
     private static void AddShipTiles(final Sea sea, final Player player, JPanel seaPanel) {
-        for(int i= 0 ; i< sea.getWidth(); i++){
-            for(int j= 0 ; j< sea.getHeight(); j++){
-                JPanel shipTiles = new JPanel();
-                shipTiles.setBackground(new Color(0, 65, 94));
-                SeaState seaState = sea.getState(i,j);
-                assignStylingToShipTile(shipTiles, seaState, player, i, j);
-                shipTiles.setPreferredSize(new Dimension(50, 50));
-                seaPanel.add(shipTiles);
+        for (int i = 0; i < sea.getWidth(); i++) {
+            for (int j = 0; j < sea.getHeight(); j++) {
+                JPanel shipTile = new JPanel(new BorderLayout(0, 0));
+                SeaState seaState = sea.getState(i, j);
+                assignStylingToShipTile(shipTile, seaState);
+                shipTile.setPreferredSize(new Dimension(50, 50));
+                seaPanel.add(shipTile);
             }
         }
     }
 
-    private static void assignStylingToShipTile(JPanel seaTile, SeaState seaState, Player player, int coordinateX, int coordinateY) {
-        switch (seaState){
+    private static void assignStylingToShipTile(JPanel seaTile, SeaState seaState) {
+        switch (seaState) {
             case HIT:
-                seaTile.setBackground(Color.red);
+                seaTile.add(getTile(HIT), BorderLayout.CENTER);
                 break;
             case MISS:
-                seaTile.setBackground(Color.white);
+                seaTile.add(getTile(MISS), BorderLayout.CENTER);
                 break;
             case SHIP:
                 seaTile.setBackground(Color.gray);
                 break;
             case EMPTY:
-                seaTile.setBackground(new Color(0, 65, 94));
+                seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
         }
     }
 
 
     private static void AddFiringTiles(final Sea sea, final Player player, JPanel seaPanel) {
-        for(int i= 0 ; i< sea.getWidth(); i++){
-            for(int j= 0 ; j< sea.getHeight(); j++){
-                JPanel seaTile = new JPanel();
-                seaTile.setBackground(new Color(0, 65, 94));
-                SeaState seaState = sea.getState(i,j);
+        for (int i = 0; i < sea.getWidth(); i++) {
+            for (int j = 0; j < sea.getHeight(); j++) {
+                JPanel seaTile = new JPanel(new BorderLayout(0, 0));
+                SeaState seaState = sea.getState(i, j);
                 assignStylingToFiringTile(seaTile, seaState, player, i, j);
                 seaTile.setPreferredSize(new Dimension(50, 50));
                 seaPanel.add(seaTile);
@@ -134,7 +141,7 @@ public class Battleship {
             }
 
             public void mousePressed(MouseEvent e) {
-                FiringService.shoot(gameState,player,i,j);
+                FiringService.shoot(gameState, player, i, j);
                 showState();
             }
 
@@ -147,36 +154,42 @@ public class Battleship {
             }
 
             public void mouseEntered(MouseEvent e) {
-                ((JPanel) e.getComponent()).setBorder(BorderFactory.createMatteBorder(2,2,2,2, Color.YELLOW) );
+                ((JPanel) e.getComponent()).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.YELLOW));
             }
-
         };
     }
 
     private static void assignStylingToFiringTile(JPanel seaTile, SeaState seaState, Player player, int coordinateX, int coordinateY) {
-        switch (seaState){
+        switch (seaState) {
             case HIT:
-                seaTile.setBackground(Color.red);
+                seaTile.add(getTile(HIT), BorderLayout.CENTER);
                 break;
             case MISS:
-                seaTile.setBackground(Color.white);
+                seaTile.add(getTile(MISS), BorderLayout.CENTER);
                 break;
             default:
-                seaTile.setBackground(new Color(0, 65, 94));
-                seaTile.addMouseListener(buildMouseListener(player, coordinateX, coordinateY));
-//                        ImageIcon image = new ImageIcon("image/pic1.jpg");
-//                        JLabel label = new JLabel("", image, JLabel.CENTER);
-//                        JPanel panel = new JPanel(new BorderLayout());
-//                        panel.add( label, BorderLayout.CENTER );
+                seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
+                if (gameState.getPlayerToFire().equals(player) && VictoryService.getVictor(gameState) == null) {
+                    seaTile.addMouseListener(buildMouseListener(player, coordinateX, coordinateY));
+                }
         }
+    }
+
+    private static JLabel getTile(String filename) {
+        ImageIcon oceanImage = new ImageIcon(filename);
+        return new JLabel("", oceanImage, JLabel.CENTER);
     }
 
 
     private static JTextArea getPlayerLabel(Player player) {
-        JTextArea playerLabel = new JTextArea("PLAYER: " + player.getName() + "\nHITS: " + player.getHits() + "\nSHOTS: " + player.getShots() + "\nACCURACY: " + player.getHitPercentage() + "%");
+        String turnIndicator = "";
+        if (gameState.getPlayerToFire().equals(player)) {
+            turnIndicator = " <-- ";
+        }
+        JTextArea playerLabel = new JTextArea("PLAYER: " + player.getName() + turnIndicator + "\nHITS: " + player.getHits() + "\nSHOTS: " + player.getShots() + "\nACCURACY: " + player.getHitPercentage() + "%");
         playerLabel.setBackground(new Color(0, 65, 94));
-        playerLabel.setForeground(new Color(255,255,255));
-        playerLabel.setMargin(new Insets(5,5,5,5));
+        playerLabel.setForeground(new Color(255, 255, 255));
+        playerLabel.setMargin(new Insets(5, 5, 5, 5));
         return playerLabel;
     }
 

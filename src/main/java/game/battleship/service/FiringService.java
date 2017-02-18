@@ -11,10 +11,12 @@ import game.battleship.model.Sea;
 public class FiringService {
 
     public static void shoot(GameState gameState, Player player, int coordinateX, int coordinateY){
-        if(gameState.getP1().equals(player)){
+        if(gameState.getP1().equals(player) && gameState.getP1().equals(gameState.getPlayerToFire())){
             fire(player, gameState.getSea2(), coordinateX, coordinateY);
-        }else{
+            gameState.setPlayerToFire(gameState.getP2());
+        }else if(gameState.getP2().equals(player) && gameState.getP2().equals(gameState.getPlayerToFire())){
             fire(player, gameState.getSea1(), coordinateX, coordinateY);
+            gameState.setPlayerToFire(gameState.getP1());
         }
     }
 

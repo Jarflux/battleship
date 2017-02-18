@@ -6,17 +6,19 @@ package game.battleship.model;
  */
 
 public class GameState {
-    Player p1;
-    Player p2;
-
-    Sea sea1;
-    Sea sea2;
+    private Player p1;
+    private Player p2;
+    private Sea sea1;
+    private Sea sea2;
+    private Player playerToFire;
+    private Player victor;
 
     public GameState( int gridSize, String nameP1, String nameP2 ){
         sea1 = new Sea(gridSize);
         sea2 = new Sea(gridSize);
         p1 = new Player(nameP1);
         p2 = new Player(nameP2);
+        playerToFire = p1;
     }
 
     public Player getP1() {
@@ -51,11 +53,19 @@ public class GameState {
         this.sea2 = sea2;
     }
 
-    public void shoot(Player player, int coordinateX, int coordinateY){
-        if (p1.equals(player)){
-            sea2.fire(coordinateX,coordinateY);
-        }else{
-            sea1.fire(coordinateX,coordinateY);
-        }
+    public Player getPlayerToFire() {
+        return playerToFire;
+    }
+
+    public void setPlayerToFire(Player playerToFire) {
+        this.playerToFire = playerToFire;
+    }
+
+    public Player getVictor() {
+        return victor;
+    }
+
+    public void setVictor(Player victor) {
+        this.victor = victor;
     }
 }

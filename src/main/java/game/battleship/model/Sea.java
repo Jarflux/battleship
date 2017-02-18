@@ -60,6 +60,17 @@ public class Sea {
         }
     }
 
+    public boolean containsActiveShip(){
+        for (List<SeaState> row: grid) {
+            for (SeaState state: row) {
+                if(state.equals(SeaState.SHIP)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int getWidth() {
         return grid.size();
     }
