@@ -22,6 +22,7 @@ public class Battleship {
     private static final String OCEAN = "src/main/resources/image/ocean.png";
     private static final String MISS = "src/main/resources/image/miss.png";
     private static final String HIT = "src/main/resources/image/hit.png";
+    private static final String HITCLEAN = "src/main/resources/image/hitclean.png";
 
     public static void main(String[] args) {
         frame = new JFrame("Battleship");
@@ -108,7 +109,10 @@ public class Battleship {
     private static void assignStylingToShipTile(JPanel seaTile, SeaState seaState) {
         switch (seaState) {
             case HIT:
-                seaTile.add(getTile(HIT), BorderLayout.CENTER);
+                JLabel hitLabel = getTile(HITCLEAN);
+                hitLabel.setOpaque(true);
+                hitLabel.setBackground(Color.gray);
+                seaTile.add(hitLabel, BorderLayout.CENTER);
                 break;
             case MISS:
                 seaTile.add(getTile(MISS), BorderLayout.CENTER);
