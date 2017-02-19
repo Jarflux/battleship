@@ -1,18 +1,23 @@
 package game.battleship.model;
 
-import sun.security.util.Length;
-
 /**
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
+
 public class Ship {
+
+    public enum Orientation {
+        HORIZONTAL,
+        VERTICAL;
+    }
+
     private int length;
-    private Orientation orientation = Orientation.HORIZONTAL;
+    private Orientation orientation;
 
-    public Ship(int length) {
+    public Ship(int length, Orientation orientation) {
         this.length = length;
-
+        this.orientation = orientation;
     }
 
     public int getLength() {
@@ -28,10 +33,15 @@ public class Ship {
     }
 
     public void rotate() {
-        switch(orientation){
-            case HORIZONTAL: this.orientation = Orientation.VERTICAL;break;
-            case VERTICAL: this.orientation = Orientation.HORIZONTAL;break;
+        switch (orientation) {
+            case HORIZONTAL:
+                this.orientation = Orientation.VERTICAL;
+                break;
+            case VERTICAL:
+                this.orientation = Orientation.HORIZONTAL;
+                break;
         }
 
     }
+
 }

@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import static game.battleship.model.Sea.State.EMPTY;
+import static game.battleship.model.Sea.State.SHIP;
+
 /**
  * Developer: Ben Oeyen
  * Date: 16/02/2017
@@ -35,8 +38,8 @@ public class Battleship {
         int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
 
         gameState = new GameState(gridSize, nameP1, nameP2);
-        gameState.getSea1().addSchip(1, 1, new Ship(3));
-        gameState.getSea2().addSchip(1, 1, new Ship(5));
+        gameState.getSea1().addSchip(0, 4, new Ship(4, Ship.Orientation.HORIZONTAL));
+        gameState.getSea2().addSchip(1, 1, new Ship(4, Ship.Orientation.VERTICAL));
 
         showState();
     }
@@ -94,43 +97,11 @@ public class Battleship {
         return playerSide;
     }
 
-    private static void AddShipTiles(final Sea sea, final Player player, JPanel seaPanel) {
-        for (int i = 0; i < sea.getWidth(); i++) {
-            for (int j = 0; j < sea.getHeight(); j++) {
-                JPanel shipTile = new JPanel(new BorderLayout(0, 0));
-                SeaState seaState = sea.getState(i, j);
-                assignStylingToShipTile(shipTile, seaState);
-                shipTile.setPreferredSize(new Dimension(50, 50));
-                seaPanel.add(shipTile);
-            }
-        }
-    }
-
-    private static void assignStylingToShipTile(JPanel seaTile, SeaState seaState) {
-        switch (seaState) {
-            case HIT:
-                JLabel hitLabel = getTile(HITCLEAN);
-                hitLabel.setOpaque(true);
-                hitLabel.setBackground(Color.gray);
-                seaTile.add(hitLabel, BorderLayout.CENTER);
-                break;
-            case MISS:
-                seaTile.add(getTile(MISS), BorderLayout.CENTER);
-                break;
-            case SHIP:
-                seaTile.setBackground(Color.gray);
-                break;
-            case EMPTY:
-                seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
-        }
-    }
-
-
     private static void AddFiringTiles(final Sea sea, final Player player, JPanel seaPanel) {
-        for (int i = 0; i < sea.getWidth(); i++) {
-            for (int j = 0; j < sea.getHeight(); j++) {
+        for (int j = 0; j < sea.getHeight(); j++) {
+            for (int i = 0; i < sea.getWidth(); i++) {
                 JPanel seaTile = new JPanel(new BorderLayout(0, 0));
-                SeaState seaState = sea.getState(i, j);
+                Sea.State seaState = sea.getState(i, j);
                 assignStylingToFiringTile(seaTile, seaState, player, i, j);
                 seaTile.setPreferredSize(new Dimension(50, 50));
                 seaPanel.add(seaTile);
@@ -159,11 +130,12 @@ public class Battleship {
 
             public void mouseEntered(MouseEvent e) {
                 ((JPanel) e.getComponent()).setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.YELLOW));
+                ((JPanel) e.getComponent()).setToolTipText("x: " + i + " y:" + j);
             }
         };
     }
 
-    private static void assignStylingToFiringTile(JPanel seaTile, SeaState seaState, Player player, int coordinateX, int coordinateY) {
+    private static void assignStylingToFiringTile(JPanel seaTile, Sea.State seaState, Player player, int coordinateX, int coordinateY) {
         switch (seaState) {
             case HIT:
                 seaTile.add(getTile(HIT), BorderLayout.CENTER);
@@ -180,8 +152,8 @@ public class Battleship {
     }
 
     private static JLabel getTile(String filename) {
-        ImageIcon oceanImage = new ImageIcon(filename);
-        return new JLabel("", oceanImage, JLabel.CENTER);
+        ImageIcon image = new ImageIcon(filename);
+        return new JLabel("", image, JLabel.CENTER);
     }
 
 
@@ -196,5 +168,39 @@ public class Battleship {
         playerLabel.setMargin(new Insets(5, 5, 5, 5));
         return playerLabel;
     }
+
+    // Code below can be removed when the debug view is no longer required
+
+    private static void AddShipTiles(final Sea sea, final Player player, JPanel seaPanel) {
+        for (int j = 0; j < sea.getHeight(); j++) {
+            for (int i = 0; i < sea.getWidth(); i++) {
+                JPanel shipTile = new JPanel(new BorderLayout(0, 0));
+                Sea.State seaState = sea.getState(i, j);
+                assignStylingToShipTile(shipTile, seaState);
+                shipTile.setPreferredSize(new Dimension(50, 50));
+                seaPanel.add(shipTile);
+            }
+        }
+    }
+
+    private static void assignStylingToShipTile(JPanel seaTile, Sea.State seaState) {
+        switch (seaState) {
+            case HIT:
+                JLabel hitLabel = getTile(HITCLEAN);
+                hitLabel.setOpaque(true);
+                hitLabel.setBackground(Color.gray);
+                seaTile.add(hitLabel, BorderLayout.CENTER);
+                break;
+            case MISS:
+                seaTile.add(getTile(MISS), BorderLayout.CENTER);
+                break;
+            case SHIP:
+                seaTile.setBackground(Color.gray);
+                break;
+            case EMPTY:
+                seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
+        }
+    }
+
 
 }

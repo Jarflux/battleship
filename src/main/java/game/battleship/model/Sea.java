@@ -1,78 +1,79 @@
 package game.battleship.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import static game.battleship.model.Sea.State.SHIP;
 
 /**
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
 
-
 // todo eens uitleggen hoe je hieraan komt, na skiverlof :)
-    //het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld...
+//het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld...
 
 public class Sea {
 
+    public enum State {
+        EMPTY,
+        SHIP,
+        HIT,
+        MISS;
+    }
 
-    List<List<SeaState>> grid;
-
+    private State[][] grid;
 
     public Sea(int gridSize) {
-        grid = new ArrayList<List<SeaState>>();
+        grid = new State[gridSize][gridSize];
         for (int i = 0; i < gridSize; i++) {
-            ArrayList<SeaState> column = new ArrayList<SeaState>();
             for (int j = 0; j < gridSize; j++) {
-                column.add(SeaState.EMPTY);
+                grid[i][j] = State.EMPTY;
             }
-            grid.add(column);
         }
     }
 
 
-    public SeaState getState(int coordinateX, int coordinateY) {
-        // todo : als de grid niet niks en grid met coordinaatX  is niet nul & ??  else grid is leeg
-        if (grid != null && grid.get(coordinateX) != null && grid.get(coordinateX).get(coordinateY) != null) {
-            return grid.get(coordinateX).get(coordinateY);
+    public State getState(int coordinateX, int coordinateY) {
+        if (grid != null) {
+            return grid[coordinateX][coordinateY];
         }
-        return SeaState.EMPTY;
+        return State.EMPTY;
     }
 
-    //todo : fucntion setState
-    public void setState(int coordinateX, int coordinateY, SeaState seaState) {
-        grid.get(coordinateX).set(coordinateY, seaState);
+    private void setState(int X, int Y, State state) {
+        if (grid != null) {
+            grid[X][Y] = state;
+        }
     }
 
-    public boolean fire(int coordinateX, int coordinateY) {
-        switch (grid.get(coordinateX).get(coordinateY)) {
+    public boolean fire(int X, int Y) {
+        switch (grid[X][Y]) {
             case SHIP:
-                setState(coordinateX, coordinateY, SeaState.HIT);
+                setState(X, Y, State.HIT);
                 return true;
             default:
-                setState(coordinateX, coordinateY, SeaState.MISS);
+                setState(X, Y, State.MISS);
                 return false;
         }
     }
 
-    public void addSchip(int coordinateX, int coordinateY, Ship ship) {
+    public void addSchip(int X, int Y, Ship ship) {
         switch (ship.getOrientation()) {
             case HORIZONTAL:
                 for (int i = 0; i < ship.getLength(); i++) {
-                    setState(coordinateX + i, coordinateY, SeaState.SHIP);
+                    setState(X + i, Y, SHIP);
                 }
                 break;
             case VERTICAL:
                 for (int i = 0; i < ship.getLength(); i++) {
-                    setState(coordinateX, coordinateY + 1, SeaState.SHIP);
+                    setState(X, Y + i, SHIP);
                 }
                 break;
         }
     }
 
-    public boolean containsActiveShip(){
-        for (List<SeaState> row: grid) {
-            for (SeaState state: row) {
-                if(state.equals(SeaState.SHIP)){
+    public boolean containsActiveShip() {
+        for (State[] gridColumn : grid) {
+            for (State gridCell : gridColumn) {
+                if (gridCell.equals(SHIP)) {
                     return true;
                 }
             }
@@ -81,10 +82,12 @@ public class Sea {
     }
 
     public int getWidth() {
-        return grid.size();
+        return grid.length;
     }
 
     public int getHeight() {
-        return grid.get(0).size();
+        return grid[0].length;
     }
+
+
 }

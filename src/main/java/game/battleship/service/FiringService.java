@@ -10,16 +10,20 @@ import game.battleship.model.Sea;
  */
 public class FiringService {
 
-    public static void shoot(GameState gameState, Player player, int coordinateX, int coordinateY){
-        if(gameState.getP1().equals(player) && gameState.getP1().equals(gameState.getPlayerToFire())){
-            fire(player, gameState.getSea2(), coordinateX, coordinateY);
-            gameState.setPlayerToFire(gameState.getP2());
-        }else if(gameState.getP2().equals(player) && gameState.getP2().equals(gameState.getPlayerToFire())){
-            fire(player, gameState.getSea1(), coordinateX, coordinateY);
-            gameState.setPlayerToFire(gameState.getP1());
+    public static void shoot(GameState gameState, Player player, int X, int Y){
+        Player p1 = gameState.getP1();
+        Player p2 = gameState.getP2();
+        Player playerToFire = gameState.getPlayerToFire();
+
+        if(p1.equals(player) && p1.equals(playerToFire)){
+            fire(player, gameState.getSea2(), X, Y);
+            gameState.setPlayerToFire(p2);
+
+        }else if(p2.equals(player) && p2.equals(playerToFire)){
+            fire(player, gameState.getSea1(), X, Y);
+            gameState.setPlayerToFire(p1);
         }
     }
-
 
     private static void fire(Player player, Sea sea, int coordinateX, int coordinateY) {
         boolean hit = sea.fire(coordinateX, coordinateY);
