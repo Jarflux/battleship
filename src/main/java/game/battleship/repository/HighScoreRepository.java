@@ -1,8 +1,11 @@
 package game.battleship.repository;
 
+import game.battleship.model.HighScore;
+
+import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Developer: Ben Oeyen
@@ -11,13 +14,30 @@ import java.util.List;
 //test
 public class HighScoreRepository {
 
-    public List<HashMap<String, Long>> getAllHighScores(){
-        //TODO implement Read highsores from file
-        return new ArrayList<HashMap<String, Long>>();
+    private static final String HIGHSCORE_FILE = "src/main/resources/image/highscores.dat";
+
+    public static List<HighScore> loadHighScores() {
+        List<HighScore> highscores = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream(HIGHSCORE_FILE);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            highscores = (List<HighScore>) ois.readObject();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return highscores;
     }
 
-    public void addHighScore(String playerName, Long highScore ){
-        // TODO implement
+    public static void saveHighScores(List<HighScore> highScores) {
+        try {
+            FileOutputStream fous = new FileOutputStream(HIGHSCORE_FILE);
+            ObjectOutputStream oos = new ObjectOutputStream(fous);
+            oos.writeObject(highScores);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }
