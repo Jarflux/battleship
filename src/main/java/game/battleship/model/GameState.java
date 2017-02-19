@@ -5,6 +5,9 @@ package game.battleship.model;
  * Date: 16/02/2017
  */
 
+
+//geeft de staat van het spel weer
+
 public class GameState {
     private Player p1;
     private Player p2;

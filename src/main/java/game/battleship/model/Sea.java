@@ -7,7 +7,13 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
+
+
+// todo eens uitleggen hoe je hieraan komt, na skiverlof :p
+    //het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld
+
 public class Sea {
+
 
     List<List<SeaState>> grid;
 
@@ -23,13 +29,16 @@ public class Sea {
         }
     }
 
+
     public SeaState getState(int coordinateX, int coordinateY) {
+        // todo : als de grid niet niks en grid met coordinaatX  is niet nul & ??  else grid is leeg
         if (grid != null && grid.get(coordinateX) != null && grid.get(coordinateX).get(coordinateY) != null) {
             return grid.get(coordinateX).get(coordinateY);
         }
         return SeaState.EMPTY;
     }
 
+    //todo : fucntion setState
     public void setState(int coordinateX, int coordinateY, SeaState seaState) {
         grid.get(coordinateX).set(coordinateY, seaState);
     }

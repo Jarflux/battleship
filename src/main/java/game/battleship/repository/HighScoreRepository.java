@@ -8,6 +8,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
+//test
 public class HighScoreRepository {
 
     public List<HashMap<String, Long>> getAllHighScores(){

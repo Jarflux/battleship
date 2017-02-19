@@ -13,6 +13,7 @@ public enum SeaState {
     MISS;
 
     public static SeaState getRandom(){
+        //todo : waarom hier een random ?
         Random rd = new Random();
         switch(rd.nextInt(4)){
             case 0: return SeaState.MISS;
