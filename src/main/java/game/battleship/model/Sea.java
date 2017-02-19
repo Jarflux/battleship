@@ -9,8 +9,8 @@ import java.util.List;
  */
 
 
-// todo eens uitleggen hoe je hieraan komt, na skiverlof :p
-    //het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld
+// todo eens uitleggen hoe je hieraan komt, na skiverlof :)
+    //het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld...
 
 public class Sea {
 
