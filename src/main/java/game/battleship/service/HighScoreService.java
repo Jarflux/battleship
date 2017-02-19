@@ -4,6 +4,7 @@ import game.battleship.model.HighScore;
 import game.battleship.model.Player;
 import game.battleship.repository.HighScoreRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class HighScoreService {
     public void addScoreToHighScore(Player player){
         List<HighScore> highScores = HighScoreRepository.loadHighScores();
         highScores.add(new HighScore(player.getName(), player.getScore()));
-        //highScores.sort();
+        Collections.sort(highScores);
         HighScoreRepository.saveHighScores(highScores);
     }
 
