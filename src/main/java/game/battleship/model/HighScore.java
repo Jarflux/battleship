@@ -1,12 +1,17 @@
 package game.battleship.model;
 
+import java.io.Serializable;
+
 import static java.lang.Integer.compare;
 
 /**
  * Developer: Ben Oeyen
  * Date: 19/02/2017
  */
-public class HighScore implements Comparable<HighScore> {
+
+// We let HighScore implement Serializable so we can save it to a file
+// We let HighScore implement Comparable so we can use Collections.sort
+public class HighScore implements Serializable,Comparable<HighScore> {
     private String playerName;
     private int score;
 

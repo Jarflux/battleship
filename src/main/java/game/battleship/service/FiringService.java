@@ -25,8 +25,8 @@ public class FiringService {
         }
     }
 
-    private static void fire(Player player, Sea sea, int coordinateX, int coordinateY) {
-        boolean hit = sea.fire(coordinateX, coordinateY);
+    private static void fire(Player player, Sea sea, int X, int Y) {
+        boolean hit = sea.fire(X, Y);
         player.incrementShots();
         if(hit){
            player.incrementHits();

@@ -58,7 +58,7 @@ public class Player {
     }
 
     public int getScore(){
-        return getHitPercentage();
+        return 100 - shots + (5 * hits);  // Just a way to determine a score
     }
 
 
