@@ -1,4 +1,6 @@
-package game.battleship.ui;
+package game.battleship;
+
+import game.battleship.ui.BattleshipFrame;
 
 /**
  * Developer: Ben Oeyen
@@ -8,7 +10,7 @@ package game.battleship.ui;
 public class Battleship {
 
     public static void main(String[] args) {
-        BattleshipFrame.getInstance();
+        BattleshipFrame.getInstance().initFrame();
     }
 
 }

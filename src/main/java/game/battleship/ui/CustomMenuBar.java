@@ -3,6 +3,8 @@ package game.battleship.ui;
 import game.battleship.model.GameState;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Developer: Ben Oeyen
@@ -14,24 +16,57 @@ public class CustomMenuBar extends JMenuBar {
         super();
         JMenu menu = new JMenu("Battleship");
         this.add(menu);
-        JMenuItem jMenuItemNewGame = new JMenuItem("New Game");
-        jMenuItemNewGame.addActionListener(event -> {
-            String nameP1 = "Ben"; //getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
-            String nameP2 = "Elien"; //getStringInput("Player 2 name"); //
-            int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
-            GameState.getInstance().newGame(gridSize,nameP1, nameP2);
-            BattleshipFrame.getInstance().showState();
+        menu.add(buildNewGameMenuItem());
+        menu.add(buildSaveGameMenuItem());
+        menu.add(buildLoadGameMenuItem());
+        menu.addSeparator();
+        menu.add(buildHighScoreMenuItem());
+        menu.addSeparator();
+        menu.add(buildExitGameMenuItem());
+    }
+
+    private JMenuItem buildNewGameMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("New Game");
+        jMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nameP1 = "Ben"; //getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
+                String nameP2 = "Elien"; //getStringInput("Player 2 name"); //
+                int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
+                GameState.getInstance().newGame(gridSize,nameP1, nameP2);
+
+                // add ships
+
+                BattleshipFrame.getInstance().showState();
+            }
         });
+        return jMenuItem;
+    }
 
-        menu.add(new JMenuItem("New Game"));
-        menu.add(new JMenuItem("Save Game"));
-        menu.add(new JMenuItem("Load Game"));
-        menu.addSeparator();
-        menu.add(new JMenuItem("Highscores"));
-        menu.addSeparator();
 
+    private JMenuItem buildSaveGameMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("Save Game");
+        return jMenuItem;
+    }
+
+    private JMenuItem buildLoadGameMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("Highscores");
+        return jMenuItem;
+    }
+
+    private JMenuItem buildHighScoreMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("Load Game");
+        return jMenuItem;
+    }
+
+    private JMenuItem buildExitGameMenuItem() {
         JMenuItem jMenuItem = new JMenuItem("Exit Game");
-        jMenuItem.addActionListener(event -> System.exit(0));
-        menu.add(new JMenuItem("Exit Game"));
+        jMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        return jMenuItem;
     }
 }
