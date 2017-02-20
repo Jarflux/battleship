@@ -9,6 +9,7 @@ package game.battleship.model;
 //geeft de staat van het spel weer
 
 public class GameState {
+    private static GameState gameState;
     private Player p1;
     private Player p2;
     private Sea sea1;
@@ -16,7 +17,17 @@ public class GameState {
     private Player playerToFire;
     private Player victor;
 
-    public GameState( int gridSize, String nameP1, String nameP2 ){
+    public static GameState getInstance(){
+        if(gameState == null){
+            gameState = new GameState();
+        }
+        return gameState;
+    }
+
+    private GameState() {
+    }
+
+    public void newGame(int gridSize, String nameP1, String nameP2 ){
         sea1 = new Sea(gridSize);
         sea2 = new Sea(gridSize);
         p1 = new Player(nameP1);
