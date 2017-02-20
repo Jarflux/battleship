@@ -16,6 +16,9 @@ import static game.battleship.model.Sea.State.SHIP;
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
+
+//TEST CONNECTIE GITLAB
+
 public class Battleship {
 
     private static JFrame frame;
