@@ -1,6 +1,7 @@
 package game.battleship.ui;
 
 import game.battleship.model.GameState;
+import game.battleship.service.GameService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,10 +34,7 @@ public class CustomMenuBar extends JMenuBar {
                 String nameP1 = "Ben"; //getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
                 String nameP2 = "Elien"; //getStringInput("Player 2 name"); //
                 int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
-                GameState.getInstance().newGame(gridSize,nameP1, nameP2);
-
-                // add ships
-
+                GameService.newGame(gridSize,nameP1, nameP2);
                 BattleshipFrame.getInstance().showState();
             }
         });
