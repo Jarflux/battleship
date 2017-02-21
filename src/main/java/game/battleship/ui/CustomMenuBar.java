@@ -31,9 +31,9 @@ public class CustomMenuBar extends JMenuBar {
         jMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nameP1 = "Ben"; //getStringInput("Player 1 name"); //JOptionPane.showInputDialog("Player 1 name");
-                String nameP2 = "Elien"; //getStringInput("Player 2 name"); //
-                int gridSize = 6; //getIntInput("Grid size"); //JOptionPane.showInputDialog("Grid Size");
+                String nameP1 = getStringInput("Player 1 name");
+                String nameP2 = getStringInput("Player 2 name");
+                int gridSize = getIntInput("Grid size");
                 GameService.newGame(gridSize,nameP1, nameP2);
                 BattleshipFrame.getInstance().showState();
             }
@@ -41,19 +41,18 @@ public class CustomMenuBar extends JMenuBar {
         return jMenuItem;
     }
 
-
     private JMenuItem buildSaveGameMenuItem() {
         JMenuItem jMenuItem = new JMenuItem("Save Game");
         return jMenuItem;
     }
 
-    private JMenuItem buildLoadGameMenuItem() {
-        JMenuItem jMenuItem = new JMenuItem("Highscores");
+    private JMenuItem buildHighScoreMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("Load Game");
         return jMenuItem;
     }
 
-    private JMenuItem buildHighScoreMenuItem() {
-        JMenuItem jMenuItem = new JMenuItem("Load Game");
+    private JMenuItem buildLoadGameMenuItem() {
+        JMenuItem jMenuItem = new JMenuItem("Highscores");
         return jMenuItem;
     }
 
@@ -66,5 +65,15 @@ public class CustomMenuBar extends JMenuBar {
             }
         });
         return jMenuItem;
+    }
+
+    private static String getStringInput(String messsage) {
+        //TODO add error handling
+        return JOptionPane.showInputDialog(messsage);
+    }
+
+    private static int getIntInput(String messsage) {
+        //TODO add error handling
+        return Integer.parseInt(JOptionPane.showInputDialog(messsage));
     }
 }
