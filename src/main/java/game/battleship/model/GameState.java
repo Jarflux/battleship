@@ -15,7 +15,6 @@ public class GameState {
     private Sea sea1;
     private Sea sea2;
     private Player playerToFire;
-    private Player victor;
 
     public static GameState getInstance(){
         if(gameState == null){
@@ -76,10 +75,12 @@ public class GameState {
     }
 
     public Player getVictor() {
-        return victor;
+        if(!gameState.getSea1().containsActiveShip()){
+            return p2;
+        }else if(!gameState.getSea2().containsActiveShip()){
+            return p1;
+        }
+        return null;
     }
 
-    public void setVictor(Player victor) {
-        this.victor = victor;
-    }
 }

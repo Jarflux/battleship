@@ -1,15 +1,10 @@
 package game.battleship.ui;
 
-import game.battleship.model.GameState;
 import game.battleship.model.Player;
 import game.battleship.model.Sea;
-import game.battleship.service.FiringService;
-import game.battleship.service.VictoryService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Developer: Ben Oeyen

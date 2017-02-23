@@ -13,4 +13,12 @@ public class GameService {
         GameState.getInstance().newGame(gridsize, playerName1, playerName2);
         ShipService.addRandomShips();
     }
+
+    public static void loadGame(GameState gameState){
+        //TODO Implement
+    }
+
+    public static void saveGame(GameState gameState){
+        //TODO Implement
+    }
 }

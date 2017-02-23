@@ -4,7 +4,6 @@ import game.battleship.model.GameState;
 import game.battleship.model.Player;
 import game.battleship.model.Sea;
 import game.battleship.service.FiringService;
-import game.battleship.service.VictoryService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +16,9 @@ import java.awt.event.MouseListener;
  */
 public class FiringPanel extends JPanel {
 
-
     private static final String OCEAN = "src/main/resources/image/ocean.png";
     private static final String MISS = "src/main/resources/image/miss.png";
     private static final String HIT = "src/main/resources/image/hit.png";
-    private static final String HITCLEAN = "src/main/resources/image/hitclean.png";
 
     public FiringPanel(Sea enemySea, Player player) {
         super();
@@ -79,7 +76,7 @@ public class FiringPanel extends JPanel {
                 break;
             default:
                 seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
-                if (GameState.getInstance().getPlayerToFire().equals(player) && VictoryService.getVictor(GameState.getInstance()) == null) {
+                if (GameState.getInstance().getPlayerToFire().equals(player) && GameState.getInstance().getVictor() == null) {
                     seaTile.addMouseListener(buildMouseListener(player, coordinateX, coordinateY));
                 }
         }

@@ -1,8 +1,9 @@
 package game.battleship.ui;
 
 import game.battleship.model.GameState;
+import game.battleship.model.HighScore;
 import game.battleship.model.Player;
-import game.battleship.service.VictoryService;
+import game.battleship.service.HighScoreService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +55,9 @@ public class BattleshipFrame extends JFrame {
         setContentPane(jPanel);
         pack();
 
-        Player victor = VictoryService.getVictor(GameState.getInstance());
+        Player victor = GameState.getInstance().getVictor();
         if (victor != null) {
+            HighScoreService.addScoreToHighScore(victor);
             JOptionPane.showMessageDialog(this, victor.getName() + " won the game!");
         }
     }
