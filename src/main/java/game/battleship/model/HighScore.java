@@ -38,6 +38,6 @@ public class HighScore implements Serializable,Comparable<HighScore> {
 
     @Override
     public int compareTo(HighScore o) {
-        return compare(this.getScore(), o.getScore());
+        return compare(o.getScore(), this.getScore());
     }
 }

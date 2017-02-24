@@ -13,7 +13,7 @@ import java.util.List;
 
 public class HighScoreRepository {
 
-    public static String highScoreFilename = "src/main/resources/image/highscores.data";
+    public static String highScoreFilename = "src/main/resources/highscores/highscores.data";
 
     public static List<HighScore> loadHighScores() {
         List<HighScore> highscores = new ArrayList<>();
