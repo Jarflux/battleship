@@ -24,7 +24,7 @@ public class PlayerSidePanel extends JPanel {
             seaPanel.add(new SeaPanel(ownSea, player), BorderLayout.NORTH);
         }
 
-        seaPanel.add(new FiringPanel(enemySea, player), BorderLayout.SOUTH);
+        seaPanel.add(new ShootingPanel(enemySea, player), BorderLayout.SOUTH);
         add(seaPanel);
     }
 }

@@ -38,19 +38,19 @@ public class Sea {
         return State.EMPTY;
     }
 
-    private void setState(int X, int Y, State state) {
+    private void setState(Position position, State state) {
         if (grid != null) {
-            grid[X][Y] = state;
+            grid[position.getX()][position.getY()] = state;
         }
     }
 
-    public boolean shoot(int X, int Y) {
-        switch (grid[X][Y]) {
+    public boolean shoot(Position position) {
+        switch (grid[position.getX()][position.getY()]) {
             case SHIP:
-                setState(X, Y, State.HIT);
+                setState(position, State.HIT);
                 return true;
             default:
-                setState(X, Y, State.MISS);
+                setState(position, State.MISS);
                 return false;
         }
     }
@@ -64,7 +64,7 @@ public class Sea {
                     }
                 }
                 for (int i = 0; i < ship.getLength(); i++) {
-                    setState(X + i, Y, SHIP);
+                    setState(new Position(X + i, Y), SHIP);
                 }
                 return true;
             case VERTICAL:
@@ -74,7 +74,7 @@ public class Sea {
                     }
                 }
                 for (int i = 0; i < ship.getLength(); i++) {
-                    setState(X, Y + i, SHIP);
+                    setState(new Position(X, Y + i), SHIP);
                 }
                 return true;
         }

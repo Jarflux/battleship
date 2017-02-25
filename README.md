@@ -17,10 +17,10 @@ Own version of the popular battleship game
 - [ ] Configure Ships
 
 ## NICE TO HAVE
-- [ ] Auto deploy fleet
+- [x] Auto deploy fleet
 - [ ] Save Game
 - [ ] Load Game
-- [ ] Artificial Intelligence
+- [x] Artificial Intelligence
 - [ ] Moving Clouds
 - [ ] Game sounds
 - [ ] Gun firing / explosion animation
