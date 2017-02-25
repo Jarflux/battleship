@@ -7,6 +7,7 @@ package game.battleship.model;
 
 public class GameState {
     private static GameState gameState;
+    private ShipConfig shipConfig;
     private Player p1;
     private Player p2;
     private Sea sea1;
@@ -23,11 +24,12 @@ public class GameState {
     private GameState() {
     }
 
-    public void newGame(int gridSize, String nameP1, String nameP2 ){
+    public void newGame(int gridSize, Player player1, Player player2 ){
+        shipConfig = new ShipConfig();
         sea1 = new Sea(gridSize);
         sea2 = new Sea(gridSize);
-        p1 = new Player(nameP1);
-        p2 = new Player(nameP2);
+        p1 = player1;
+        p2 = player2;
         playerToFire = p1;
     }
 
@@ -69,6 +71,10 @@ public class GameState {
 
     public void setPlayerToFire(Player playerToFire) {
         this.playerToFire = playerToFire;
+    }
+
+    public ShipConfig getShipConfig() {
+        return shipConfig;
     }
 
     public Player getVictor() {

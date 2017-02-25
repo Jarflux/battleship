@@ -1,5 +1,8 @@
 package game.battleship.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static game.battleship.model.Sea.State.SHIP;
 
 /**
@@ -41,7 +44,7 @@ public class Sea {
         }
     }
 
-    public boolean fire(int X, int Y) {
+    public boolean shoot(int X, int Y) {
         switch (grid[X][Y]) {
             case SHIP:
                 setState(X, Y, State.HIT);
@@ -52,19 +55,30 @@ public class Sea {
         }
     }
 
-    public void addSchip(int X, int Y, Ship ship) {
-        switch (ship.getOrientation()) {
+    public boolean addSchip(int X, int Y, Ship ship, Ship.Orientation orientation) {
+        switch (orientation) {
             case HORIZONTAL:
+                for (int i = 0; i < ship.getLength(); i++) {
+                    if (getState(X + i, Y).equals(SHIP)) {
+                        return false;
+                    }
+                }
                 for (int i = 0; i < ship.getLength(); i++) {
                     setState(X + i, Y, SHIP);
                 }
-                break;
+                return true;
             case VERTICAL:
+                for (int i = 0; i < ship.getLength(); i++) {
+                    if (getState(X, Y + i).equals(SHIP)) {
+                        return false;
+                    }
+                }
                 for (int i = 0; i < ship.getLength(); i++) {
                     setState(X, Y + i, SHIP);
                 }
-                break;
+                return true;
         }
+        return false;
     }
 
     public boolean containsActiveShip() {
@@ -84,6 +98,19 @@ public class Sea {
 
     public int getHeight() {
         return grid[0].length;
+    }
+
+    public List<Position> getUnShotPositions() {
+        List<Position> emptyPositionList = new ArrayList<>();
+        for (int X = 0; X < grid.length; X++) {
+            for (int y = 0; y < grid[0].length; y++) {
+                if(!State.MISS.equals(grid[X][y])
+                        && !State.HIT.equals(grid[X][y])){
+                    emptyPositionList.add(new Position(X,y));
+                }
+            }
+        }
+        return emptyPositionList;
     }
 
 

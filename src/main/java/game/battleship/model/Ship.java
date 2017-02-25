@@ -13,11 +13,9 @@ public class Ship {
     }
 
     private int length;
-    private Orientation orientation;
 
-    public Ship(int length, Orientation orientation) {
+    public Ship(int length) {
         this.length = length;
-        this.orientation = orientation;
     }
 
     public int getLength() {
@@ -26,22 +24,6 @@ public class Ship {
 
     public void setLength(int length) {
         this.length = length;
-    }
-
-    public Orientation getOrientation() {
-        return orientation;
-    }
-
-    public void rotate() {
-        switch (orientation) {
-            case HORIZONTAL:
-                this.orientation = Orientation.VERTICAL;
-                break;
-            case VERTICAL:
-                this.orientation = Orientation.HORIZONTAL;
-                break;
-        }
-
     }
 
 }

@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class BattleshipFrame extends JFrame {
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     private static final String COVER = "src/main/resources/image/cover.jpeg";
 

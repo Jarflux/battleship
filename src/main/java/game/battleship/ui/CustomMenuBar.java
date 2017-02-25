@@ -1,6 +1,7 @@
 package game.battleship.ui;
 
 import game.battleship.model.HighScore;
+import game.battleship.model.Jarvis;
 import game.battleship.service.GameService;
 import game.battleship.service.HighScoreService;
 
@@ -33,10 +34,18 @@ public class CustomMenuBar extends JMenuBar {
         jMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nameP1 = getStringInput("Player 1 name");
-                String nameP2 = getStringInput("Player 2 name");
-                int gridSize = getIntInput("Grid size");
-                GameService.newGame(gridSize, nameP1, nameP2);
+                int gameMode = getIntInput("[1] Player vs Player \n[2] Player vs Easy AI");
+                String nameP1;
+                String nameP2;
+                switch(gameMode){
+                    case 1:
+                        nameP1 = getStringInput("Player 1 name");
+                        nameP2 = getStringInput("Player 2 name");
+                        GameService.newGamePlayerVsPlayer(10, nameP1, nameP2);
+                    case 2:
+                        nameP1 = getStringInput("Player 1 name");
+                        GameService.newGamePlayerVsJarvis(10, nameP1, Jarvis.IntelligenceLevel.STUPID);
+                }
                 BattleshipFrame.getInstance().showState();
             }
         });

@@ -1,7 +1,11 @@
 package game.battleship.service;
 
 import game.battleship.model.GameState;
+import game.battleship.model.Sea;
 import game.battleship.model.Ship;
+import game.battleship.model.ShipConfig;
+
+import java.util.Random;
 
 /**
  * Developer: Ben Oeyen
@@ -9,9 +13,23 @@ import game.battleship.model.Ship;
  */
 public class ShipService {
 
-    public static void addRandomShips(){
-        GameState.getInstance().getSea1().addSchip(1, 1, new Ship(3, Ship.Orientation.HORIZONTAL));
-        GameState.getInstance().getSea2().addSchip(1, 1, new Ship(5, Ship.Orientation.VERTICAL));
+    public static void randomizeShips(){
+        placeShipsRandomOnSea(GameState.getInstance().getShipConfig(), GameState.getInstance().getSea1());
+        placeShipsRandomOnSea(GameState.getInstance().getShipConfig(), GameState.getInstance().getSea2());
+    }
+
+    private static void placeShipsRandomOnSea(ShipConfig shipConfig, Sea sea) {
+        Random random = new Random();
+        for(Ship ship: shipConfig.getShips()){
+            boolean shipPlaced = false;
+            while(!shipPlaced){
+                if(random.nextBoolean()){
+                    shipPlaced = sea.addSchip(random.nextInt(sea.getWidth() - ship.getLength()), random.nextInt(sea.getHeight()), ship, Ship.Orientation.HORIZONTAL);
+                }else{
+                    shipPlaced = sea.addSchip(random.nextInt(sea.getWidth()), random.nextInt(sea.getHeight() - ship.getLength()), ship, Ship.Orientation.VERTICAL);
+                }
+            }
+        }
     }
 
 }
