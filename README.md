@@ -5,12 +5,12 @@ Own version of the popular battleship game
 - [x] Basic UI
 - [x] Different Sea States
 - [x] Basic Colors to UI
-- [ ] Menubar with actions
-- [ ] Show highscores
+- [x] Menubar with actions
+- [x] Show highscores
 - [x] Turn based firing
 - [x] Victory conditions
 - [x] Images in UI
-- [ ] After victory add highscores
+- [x] After victory add highscores
 - [ ] Place Ships
 - [x] Firing
 - [x] Calculate Highscore

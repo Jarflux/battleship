@@ -7,9 +7,6 @@ import static game.battleship.model.Sea.State.SHIP;
  * Date: 16/02/2017
  */
 
-// todo eens uitleggen hoe je hieraan komt, na skiverlof :)
-//het aanmaken van Het spelveld + toevoegen van Boten + Bekijken of er nog boten aanwezig zijn op het speelveld...
-
 public class Sea {
 
     public enum State {

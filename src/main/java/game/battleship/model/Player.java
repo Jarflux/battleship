@@ -5,8 +5,6 @@ package game.battleship.model;
  * Date: 16/02/2017
  */
 
-//alle eigenschappen die een speler heeft
-
 public class Player {
     private int id;
     private String name;
