@@ -34,7 +34,7 @@ public class ShootingPanel extends JPanel {
             for (int X = 0; X < sea.getWidth(); X++) {
                 JPanel seaTile = new JPanel(new BorderLayout(0, 0));
                 Sea.State seaState = sea.getState(X, Y);
-                assignStylingToFiringTile(seaTile, seaState, player, new Position(X,Y));
+                assignStylingToFiringTile(seaTile, seaState, player, new Position(X, Y));
                 seaTile.setPreferredSize(new Dimension(50, 50));
                 add(seaTile);
             }
@@ -75,10 +75,18 @@ public class ShootingPanel extends JPanel {
             case MISS:
                 seaTile.add(getTile(MISS), BorderLayout.CENTER);
                 break;
+            case SHIP:
+                if (GameState.getInstance().getVictor() != null) {
+                    seaTile.setBackground(Color.gray);
+                }
             default:
-                seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
-                if (GameState.getInstance().getPlayerToFire().equals(player) && GameState.getInstance().getVictor() == null) {
-                    seaTile.addMouseListener(buildMouseListener(player, position));
+                if (Sea.State.SHIP.equals(seaState) && GameState.getInstance().getVictor() != null) {
+                    seaTile.setBackground(Color.gray);
+                } else {
+                    seaTile.add(getTile(OCEAN), BorderLayout.CENTER);
+                    if (GameState.getInstance().getPlayerToFire().equals(player) && GameState.getInstance().getVictor() == null) {
+                        seaTile.addMouseListener(buildMouseListener(player, position));
+                    }
                 }
         }
     }

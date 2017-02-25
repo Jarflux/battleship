@@ -41,10 +41,10 @@ public class CustomMenuBar extends JMenuBar {
                     case 1:
                         nameP1 = getStringInput("Player 1 name");
                         nameP2 = getStringInput("Player 2 name");
-                        GameService.newGamePlayerVsPlayer(10, nameP1, nameP2);
+                        GameService.newGamePlayerVsPlayer(5, nameP1, nameP2);
                     case 2:
                         nameP1 = getStringInput("Player 1 name");
-                        GameService.newGamePlayerVsJarvis(10, nameP1, Jarvis.IntelligenceLevel.STUPID);
+                        GameService.newGamePlayerVsJarvis(5, nameP1, Jarvis.IntelligenceLevel.STUPID);
                 }
                 BattleshipFrame.getInstance().showState();
             }
