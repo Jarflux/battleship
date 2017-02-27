@@ -1,11 +1,13 @@
 package game.battleship.model;
 
+import java.io.Serializable;
+
 /**
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
 
-public class Player {
+public class Player implements Serializable {
     private int id;
     private String name;
     private int shots = 0;

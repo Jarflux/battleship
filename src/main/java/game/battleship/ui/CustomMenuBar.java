@@ -41,7 +41,8 @@ public class CustomMenuBar extends JMenuBar {
                     case 1:
                         nameP1 = getStringInput("Player 1 name");
                         nameP2 = getStringInput("Player 2 name");
-                        GameService.newGamePlayerVsPlayer(5, nameP1, nameP2);
+                        GameService.newGamePlayerVsPlayer(10, nameP1, nameP2);
+                        break;
                     case 2:
                         nameP1 = getStringInput("Player 1 name");
                         GameService.newGamePlayerVsJarvis(5, nameP1, Jarvis.IntelligenceLevel.STUPID);
@@ -54,6 +55,13 @@ public class CustomMenuBar extends JMenuBar {
 
     private JMenuItem buildSaveGameMenuItem() {
         JMenuItem jMenuItem = new JMenuItem("Save Game");
+        jMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filename = getStringInput("Save game filename");
+                GameService.saveGame(filename);
+            }
+        });
         return jMenuItem;
     }
 
@@ -85,6 +93,14 @@ public class CustomMenuBar extends JMenuBar {
 
     private JMenuItem buildLoadGameMenuItem() {
         JMenuItem jMenuItem = new JMenuItem("Load Game");
+        jMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filename = getStringInput("Load game filename");
+                GameService.loadGame(filename);
+                BattleshipFrame.getInstance().showState();
+            }
+        });
         return jMenuItem;
     }
 

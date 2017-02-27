@@ -1,11 +1,13 @@
 package game.battleship.model;
 
+import java.io.Serializable;
+
 /**
  * Developer: Ben Oeyen
  * Date: 16/02/2017
  */
 
-public class GameState {
+public class GameState implements Serializable {
     private static GameState gameState;
     private ShipConfig shipConfig;
     private Player p1;
@@ -32,6 +34,16 @@ public class GameState {
         p2 = player2;
         playerToFire = p1;
     }
+
+    public void loadGame(GameState gameState){
+        this.p1 = gameState.getP1();
+        this.p2 = gameState.getP2();
+        this.sea1 = gameState.getSea1();
+        this.sea2 = gameState.getSea2();
+        this.playerToFire = gameState.getPlayerToFire();
+        this.shipConfig = gameState.getShipConfig();
+    }
+
 
     public Player getP1() {
         return p1;

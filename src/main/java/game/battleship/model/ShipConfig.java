@@ -1,12 +1,13 @@
 package game.battleship.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Developer: Ben Oeyen
  * Date: 25/02/2017
  */
-public class ShipConfig {
+public class ShipConfig implements Serializable {
 
     private ArrayList<Ship> ships;
     private ArrayList<Ship> defaultShips;

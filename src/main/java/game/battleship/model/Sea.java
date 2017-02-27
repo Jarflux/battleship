@@ -1,5 +1,6 @@
 package game.battleship.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import static game.battleship.model.Sea.State.SHIP;
  * Date: 16/02/2017
  */
 
-public class Sea {
+public class Sea implements Serializable {
 
     public enum State {
         EMPTY,
