@@ -34,7 +34,7 @@ public class CustomMenuBar extends JMenuBar {
         jMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int gameMode = getIntInput("[1] Player vs Player \n[2] Player vs Easy AI");
+                int gameMode = getIntInput("[1] Player vs Player\n[2] Player vs Easy AI\n[3] Player vs Regular AI\n[4] Player vs Hard AI");
                 String nameP1;
                 String nameP2;
                 switch(gameMode){
@@ -45,7 +45,16 @@ public class CustomMenuBar extends JMenuBar {
                         break;
                     case 2:
                         nameP1 = getStringInput("Player 1 name");
-                        GameService.newGamePlayerVsJarvis(5, nameP1, Jarvis.IntelligenceLevel.STUPID);
+                        GameService.newGamePlayerVsJarvis(10, nameP1, Jarvis.IntelligenceLevel.STUPID);
+                        break;
+                    case 3:
+                        nameP1 = getStringInput("Player 1 name");
+                        GameService.newGamePlayerVsJarvis(10, nameP1, Jarvis.IntelligenceLevel.REGULAR);
+                        break;
+                    case 4:
+                        nameP1 = getStringInput("Player 1 name");
+                        GameService.newGamePlayerVsJarvis(10, nameP1, Jarvis.IntelligenceLevel.SMART);
+                        break;
                 }
                 BattleshipFrame.getInstance().showState();
             }

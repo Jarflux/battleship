@@ -23,7 +23,7 @@ public class ShootingService {
     private static void executeShotAndPossibleJarvisShot(GameState gameState, Player player, Position position, Player p1, Sea sea1, Sea sea2) {
         shoot(player, sea1, position);
         if (p1 instanceof Jarvis) {
-            shoot(p1, sea2, JarvisService.calculateNextShot(sea2));
+            shoot(p1, sea2, JarvisService.calculateNextShot(sea2, ((Jarvis) p1).getIntelligenceLevel()));
         } else {
             gameState.setPlayerToFire(p1);
         }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static game.battleship.model.Sea.State.SHIP;
+import static game.battleship.model.Sea.State.*;
 
 /**
  * Developer: Ben Oeyen
@@ -51,7 +51,7 @@ public class Sea implements Serializable {
                 setState(position, State.HIT);
                 return true;
             default:
-                setState(position, State.MISS);
+                setState(position, MISS);
                 return false;
         }
     }
@@ -104,15 +104,64 @@ public class Sea implements Serializable {
     public List<Position> getUnShotPositions() {
         List<Position> emptyPositionList = new ArrayList<>();
         for (int X = 0; X < grid.length; X++) {
-            for (int y = 0; y < grid[0].length; y++) {
-                if(!State.MISS.equals(grid[X][y])
-                        && !State.HIT.equals(grid[X][y])){
-                    emptyPositionList.add(new Position(X,y));
+            for (int Y = 0; Y < grid[0].length; Y++) {
+                if (!MISS.equals(grid[X][Y])
+                        && !State.HIT.equals(grid[X][Y])) {
+                    emptyPositionList.add(new Position(X, Y));
                 }
             }
         }
         return emptyPositionList;
     }
 
+    public List<Position> getUnShotShipPositions() {
+        List<Position> unshotShipPositionList = new ArrayList<>();
+        for (int X = 0; X < grid.length; X++) {
+            for (int Y = 0; Y < grid[0].length; Y++) {
+                if (State.SHIP.equals(grid[X][Y])) {
+                    unshotShipPositionList.add(new Position(X, Y));
+                }
+            }
+        }
+        return unshotShipPositionList;
+    }
+
+
+    public List<Position> getUnShotPositionsWithPotential() {
+        List<Position> unshotPotentialPositionList = new ArrayList<>();
+        for (int X = 0; X < grid.length; X++) {
+            for (int Y = 0; Y < grid[0].length; Y++) {
+                if (State.HIT.equals(grid[X][Y])) {
+                    unshotPotentialPositionList.addAll(getUnShotPositionsAroundPosition(new Position(X, Y)));
+                }
+            }
+        }
+        return unshotPotentialPositionList;
+    }
+
+    public List<Position> getUnShotPositionsAroundPosition(Position position) {
+        List<Position> unshotPotentialPositionList = new ArrayList<>();
+        AddIfValidUnshotPosition(unshotPotentialPositionList, position.getX(), position.getY() - 1);
+        AddIfValidUnshotPosition(unshotPotentialPositionList, position.getX() + 1, position.getY());
+        AddIfValidUnshotPosition(unshotPotentialPositionList, position.getX(), position.getY() + 1);
+        AddIfValidUnshotPosition(unshotPotentialPositionList, position.getX() - 1, position.getY());
+        return unshotPotentialPositionList;
+    }
+
+    private void AddIfValidUnshotPosition(List<Position> unshotPotentialPositionList, int x, int y) {
+        Position left = new Position(x, y);
+        if (isValidUnShotPosition(left)) {
+            unshotPotentialPositionList.add(left);
+        }
+    }
+
+    private boolean isValidUnShotPosition(Position position) {
+        return position.getX() > 0
+                && position.getX() < grid.length
+                && position.getY() > 0
+                && position.getY() < grid[0].length
+                && grid[position.getX()][position.getY()] != HIT
+                && grid[position.getX()][position.getY()] != MISS;
+    }
 
 }
