@@ -16,7 +16,7 @@ public class BattleshipFrame extends JFrame {
 
     public static final boolean DEBUG = false;
 
-    private static final String COVER = "src/main/resources/image/cover.jpeg";
+    private static final String COVER = "/image/cover.jpeg";
 
     private static BattleshipFrame frame;
 
@@ -39,7 +39,7 @@ public class BattleshipFrame extends JFrame {
     }
 
     public void showCover() {
-        ImageIcon image = new ImageIcon(COVER);
+        ImageIcon image = new ImageIcon(BattleshipFrame.class.getResource(COVER));
         JLabel label = new JLabel("", image, JLabel.CENTER);
         JPanel jPanel = new JPanel();
         jPanel.add(label);

@@ -6,10 +6,14 @@ import game.battleship.model.Position;
 import game.battleship.model.Sea;
 import game.battleship.service.ShootingService;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Developer: Ben Oeyen
@@ -17,9 +21,9 @@ import java.awt.event.MouseListener;
  */
 public class ShootingPanel extends JPanel {
 
-    private static final String OCEAN = "src/main/resources/image/ocean.png";
-    private static final String MISS = "src/main/resources/image/miss.png";
-    private static final String HIT = "src/main/resources/image/hit.png";
+    private static final String OCEAN = "/image/ocean.png";
+    private static final String MISS = "/image/miss.png";
+    private static final String HIT = "/image/hit.png";
 
     public ShootingPanel(Sea enemySea, Player player) {
         super();
@@ -48,7 +52,12 @@ public class ShootingPanel extends JPanel {
             }
 
             public void mousePressed(MouseEvent e) {
-                ShootingService.shoot(GameState.getInstance(), player, position);
+                boolean hit = ShootingService.shoot(GameState.getInstance(), player, position);
+                if(hit){
+                    playSound("hit-shorter");
+                }else{
+                    playSound("miss");
+                }
                 BattleshipFrame.getInstance().showState();
             }
 
@@ -92,7 +101,19 @@ public class ShootingPanel extends JPanel {
     }
 
     private JLabel getTile(String filename) {
-        ImageIcon image = new ImageIcon(filename);
+        ImageIcon image = new ImageIcon(ShootingPanel.class.getResource(filename));
         return new JLabel("", image, JLabel.CENTER);
+    }
+
+    private void playSound(String filename) {
+        try {
+            URL soundName = ShootingPanel.class.getResource("/sounds/" + filename + ".wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundName);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -18,7 +18,7 @@ public class HighScoreServiceTest {
 
     @BeforeClass
     public static void setHighScoreTestFileName(){
-        HighScoreRepository.highScoreFilename = "src/main/resources/image/testhighscores.data";
+        HighScoreRepository.highScoreFilename = "src/resources/image/testhighscores.data";
     }
 
     @Before
