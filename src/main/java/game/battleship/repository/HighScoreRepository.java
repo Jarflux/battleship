@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 16/02/2017
  */
 

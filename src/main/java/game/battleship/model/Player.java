@@ -3,7 +3,7 @@ package game.battleship.model;
 import java.io.Serializable;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 16/02/2017
  */
 

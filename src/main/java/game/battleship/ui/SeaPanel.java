@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 20/02/2017
  */
 public class SeaPanel extends JPanel{

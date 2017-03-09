@@ -8,7 +8,7 @@ import game.battleship.model.ShipConfig;
 import java.util.Random;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 21/02/2017
  */
 public class ShipService {

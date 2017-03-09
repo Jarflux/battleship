@@ -5,7 +5,7 @@ import game.battleship.model.GameState;
 import java.io.*;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 16/02/2017
  */
 

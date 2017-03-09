@@ -3,7 +3,7 @@ package game.battleship.service;
 import game.battleship.model.*;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 17/02/2017
  */
 public class ShootingService {

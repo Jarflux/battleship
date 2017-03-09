@@ -1,7 +1,7 @@
 package game.battleship.model;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 25/02/2017
  */
 public class Jarvis extends Player{

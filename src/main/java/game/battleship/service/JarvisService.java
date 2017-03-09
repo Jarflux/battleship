@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 25/02/2017
  */
 public class JarvisService {

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 20/02/2017
  */
 public class ShootingPanel extends JPanel {

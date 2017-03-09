@@ -3,7 +3,7 @@ package game.battleship;
 import game.battleship.ui.BattleshipFrame;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 16/02/2017
  */
 

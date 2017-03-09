@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 17/02/2017
  */
 public class CustomMenuBar extends JMenuBar {

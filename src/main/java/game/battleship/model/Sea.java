@@ -7,7 +7,7 @@ import java.util.List;
 import static game.battleship.model.Sea.State.*;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 16/02/2017
  */
 

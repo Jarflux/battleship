@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Developer: Ben Oeyen
+ * Developer: Gilles Plaquet
  * Date: 19/02/2017
  */
 public class HighScoreService {
