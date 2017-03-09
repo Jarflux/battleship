@@ -14,5 +14,5 @@ hs_err_pid*
 .idea
 
 # Ignore highscores
-*highscores/*
-*savedgames/*
+*highscores*
+*savedgames*
