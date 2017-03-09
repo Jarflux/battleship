@@ -6,7 +6,6 @@ package game.battleship.model;
  */
 public class Jarvis extends Player{
 
-
     public enum IntelligenceLevel{
         STUPID,
         REGULAR,

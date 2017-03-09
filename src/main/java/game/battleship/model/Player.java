@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 
 public class Player implements Serializable {
-    private int id;
     private String name;
     private int shots = 0;
     private int hits = 0;
@@ -19,10 +18,6 @@ public class Player implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getShots() {
@@ -41,14 +36,6 @@ public class Player implements Serializable {
         hits++;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getHitPercentage() {
         if (shots != 0) {
             return (int) (((double) hits) / ((double) shots) * 100);
@@ -58,7 +45,7 @@ public class Player implements Serializable {
     }
 
     public int getScore(){
-        return 100 - shots + (5 * hits);  // Just a way to determine a score
+        return getHitPercentage();  // Just a way to determine a score
     }
 
 

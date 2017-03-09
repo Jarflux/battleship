@@ -31,7 +31,6 @@ public class Sea implements Serializable {
         }
     }
 
-
     public State getState(int coordinateX, int coordinateY) {
         if (grid != null) {
             return grid[coordinateX][coordinateY];
