@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -29,13 +28,13 @@ public class ShootingPanel extends JPanel {
         super();
         setBackground(new Color(84, 147, 175));
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        setLayout(new GridLayout(enemySea.getWidth(), enemySea.getHeight(), 5, 5));
+        setLayout(new GridLayout(enemySea.getGridSize(), enemySea.getGridSize(), 5, 5));
         AddFiringTiles(enemySea, player);
     }
 
     private void AddFiringTiles(final Sea sea, final Player player) {
-        for (int Y = 0; Y < sea.getHeight(); Y++) {
-            for (int X = 0; X < sea.getWidth(); X++) {
+        for (int Y = 0; Y < sea.getGridSize(); Y++) {
+            for (int X = 0; X < sea.getGridSize(); X++) {
                 JPanel seaTile = new JPanel(new BorderLayout(0, 0));
                 Sea.State seaState = sea.getState(X, Y);
                 assignStylingToFiringTile(seaTile, seaState, player, new Position(X, Y));

@@ -24,16 +24,16 @@ public class ShipService {
             boolean shipPlaced = false;
             while (!shipPlaced) {
                 if (random.nextBoolean()) {
-                    if (sea.getWidth() == ship.getLength()) { // This prevents random.nextInt(0) which gives an exception
-                        shipPlaced = sea.addSchip(0, random.nextInt(sea.getHeight()), ship, Ship.Orientation.HORIZONTAL);
+                    if (sea.getGridSize() == ship.getLength()) { // This prevents random.nextInt(0) which gives an exception
+                        shipPlaced = sea.addSchip(0, random.nextInt(sea.getGridSize()), ship, Ship.Orientation.HORIZONTAL);
                     } else {
-                        shipPlaced = sea.addSchip(random.nextInt(sea.getWidth() - ship.getLength()), random.nextInt(sea.getHeight()), ship, Ship.Orientation.HORIZONTAL);
+                        shipPlaced = sea.addSchip(random.nextInt(sea.getGridSize() - ship.getLength()), random.nextInt(sea.getGridSize()), ship, Ship.Orientation.HORIZONTAL);
                     }
                 } else {
-                    if (sea.getHeight() == ship.getLength()) { // This prevents random.nextInt(0) which gives an exception
-                        shipPlaced = sea.addSchip(random.nextInt(sea.getWidth()), 0, ship, Ship.Orientation.VERTICAL);
+                    if (sea.getGridSize() == ship.getLength()) { // This prevents random.nextInt(0) which gives an exception
+                        shipPlaced = sea.addSchip(random.nextInt(sea.getGridSize()), 0, ship, Ship.Orientation.VERTICAL);
                     } else {
-                        shipPlaced = sea.addSchip(random.nextInt(sea.getWidth()), random.nextInt(sea.getHeight() - ship.getLength()), ship, Ship.Orientation.VERTICAL);
+                        shipPlaced = sea.addSchip(random.nextInt(sea.getGridSize()), random.nextInt(sea.getGridSize() - ship.getLength()), ship, Ship.Orientation.VERTICAL);
                     }
                 }
             }

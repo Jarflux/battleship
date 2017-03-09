@@ -12,16 +12,13 @@ public class ShipConfig implements Serializable {
     private ArrayList<Ship> ships;
     private ArrayList<Ship> defaultShips;
 
-    {
+    public ShipConfig() {
         defaultShips = new ArrayList<>();
         defaultShips.add(new Ship(5));
         defaultShips.add(new Ship(4));
         defaultShips.add(new Ship(3));
         defaultShips.add(new Ship(3));
         defaultShips.add(new Ship(2));
-    }
-
-    public ShipConfig() {
         resetToDefault();
     }
 

@@ -15,6 +15,13 @@ public class GameState implements Serializable {
     private Sea sea1;
     private Sea sea2;
     private Player playerToFire;
+    private GameMode gameMode;
+
+    public enum GameMode {
+        CLASSIC,
+        REPEAT,
+        SALVO;
+    }
 
     public static GameState getInstance(){
         if(gameState == null){

@@ -21,13 +21,13 @@ public class SeaPanel extends JPanel{
         super();
         setBackground(new Color(84, 147, 175));
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        setLayout(new GridLayout(sea.getWidth(), sea.getHeight(), 5, 5));
+        setLayout(new GridLayout(sea.getGridSize(), sea.getGridSize(), 5, 5));
         AddShipTiles(sea, player);
     }
 
     private void AddShipTiles(final Sea sea, final Player player) {
-        for (int j = 0; j < sea.getHeight(); j++) {
-            for (int i = 0; i < sea.getWidth(); i++) {
+        for (int j = 0; j < sea.getGridSize(); j++) {
+            for (int i = 0; i < sea.getGridSize(); i++) {
                 JPanel shipTile = new JPanel(new BorderLayout(0, 0));
                 Sea.State seaState = sea.getState(i, j);
                 assignStylingToShipTile(shipTile, seaState);

@@ -92,12 +92,8 @@ public class Sea implements Serializable {
         return false;
     }
 
-    public int getWidth() {
+    public int getGridSize() {
         return grid.length;
-    }
-
-    public int getHeight() {
-        return grid[0].length;
     }
 
     public List<Position> getUnShotPositions() {
