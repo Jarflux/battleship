@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Developer: Gilles Plaquet
+ * Developer: Ben Oeyen
  * Date: 20/02/2017
  */
 public class PlayerLabel extends JTextArea{

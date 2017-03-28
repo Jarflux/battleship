@@ -5,7 +5,7 @@ import java.io.Serializable;
 import static java.lang.Integer.compare;
 
 /**
- * Developer: Gilles Plaquet
+ * Developer: Ben Oeyen
  * Date: 19/02/2017
  */
 

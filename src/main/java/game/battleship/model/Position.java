@@ -1,7 +1,7 @@
 package game.battleship.model;
 
 /**
- * Developer: Gilles Plaquet
+ * Developer: Ben Oeyen
  * Date: 25/02/2017
  */
 public class Position {

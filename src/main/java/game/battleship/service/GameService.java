@@ -6,7 +6,7 @@ import game.battleship.model.Player;
 import game.battleship.repository.SavedGameRepository;
 
 /**
- * Developer: Gilles Plaquet
+ * Developer: Ben Oeyen
  * Date: 21/02/2017
  */
 public class GameService {
